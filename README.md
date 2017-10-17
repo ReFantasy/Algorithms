@@ -2,11 +2,13 @@
 算法导论C++实现
 
 ## 十二章 二叉查找树
+源文件：
 [bst.h](./bst.h)
 
 [bst.cpp](./bst.cpp)
+
+类成员函数：：
 ```C++
-//类成员函数
 bool insert(CBstNode* new_node);                               //插入一个结点
 bool insert(decltype(CBstNode::value) new_value);                //插入值为new_value的结点
 bool deleteNode(CBstNode* pNode);                                //删除结点
