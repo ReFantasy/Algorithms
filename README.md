@@ -30,22 +30,22 @@ using namespace std;
 int main()
 {
   //创建查找树的实例
-  CBst btree;  
+  CBst bstree;  
   
   //插入若干值
-  btree.insert(4);
-  btree.insert(3);
-  btree.insert(2);
-  btree.insert(5);
-  btree.insert(10);
-  btree.insert(8);
-  btree.insert(12);
+  bstree.insert(4);
+  bstree.insert(3);
+  bstree.insert(2);
+  bstree.insert(5);
+  bstree.insert(10);
+  bstree.insert(8);
+  bstree.insert(12);
 	
   //删除值为3的结点
-  btree.deleteNode(3);
+  bstree.deleteNode(3);
   
   //排序打印查找树
-  btree.printBySort();
+  bstree.printBySort();
   return 0;
 }
 
