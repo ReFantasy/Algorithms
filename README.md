@@ -2,13 +2,13 @@
 算法导论C++实现
 
 ## 十二章 二叉查找树
-源文件：
+**源文件：**
 
 [bst.h](./bst.h)
 
 [bst.cpp](./bst.cpp)
 
-类成员函数：：
+**类成员函数:**
 ```C++
 bool insert(CBstNode* new_node);                               //插入一个结点
 bool insert(decltype(CBstNode::value) new_value);                //插入值为new_value的结点
@@ -21,7 +21,7 @@ void printBySort();                                              //排序输出�
 ```
 
 
-使用示例：
+**使用示例：**
 ```C++
 #include <iostream>
 #include "bst.h"  //引入头文件
