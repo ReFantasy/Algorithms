@@ -15,21 +15,22 @@ using namespace std;
 int main()
 {
   //创建查找树的实例
-	CBst btree;  
+  CBst btree;  
   
   //插入若干值
-	btree.insert(4);
-	btree.insert(3);
-	btree.insert(2);
-	btree.insert(5);
-	btree.insert(10);
-	btree.insert(8);
-	btree.insert(12);
+  btree.insert(4);
+  btree.insert(3);
+  btree.insert(2);
+  btree.insert(5);
+  btree.insert(10);
+  btree.insert(8);
+  btree.insert(12);
 	
-	
-	btree.deleteNode(3);
-	btree.printBySort();
-	return 0;
+  //删除值为3的结点
+  btree.deleteNode(3);
+  
+  btree.printBySort();
+  return 0;
 }
 
 ```
