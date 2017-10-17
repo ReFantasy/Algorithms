@@ -3,7 +3,16 @@
 
 ## 十二章 二叉查找树
 [bst.h](./bst.h)
-
+```
+bool insert(CBstNode* new_node);                                 //插入一个结点
+bool insert(decltype(CBstNode::value) new_value);                //插入值为new_value的结点
+bool deleteNode(CBstNode* pNode);                                //删除结点
+bool deleteNode(decltype(CBstNode::value) delete_value);         //删除值为delete_value的结点
+CBstNode* serarchKey(decltype(CBstNode::value) value);           //查找值value的结点,失败返回 nullptr
+CBstNode* minValue();                                            //返回查找树中的最小值	
+CBstNode* maxValue();                                            //返回查找树中的最大值
+void printBySort();                                              //排序输出结点的值
+```
 [bst.cpp](./bst.cpp)
 
 使用示例：
