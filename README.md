@@ -29,7 +29,8 @@ int main()
   //删除值为3的结点
   btree.deleteNode(3);
   
-  btree.printBySort();
+  //排序打印查找树
+  btree.printBySort();
   return 0;
 }
 
