@@ -96,6 +96,8 @@ int main()
 #include <iostream>
 #include "rbtree.h"
 using namespace std;
+
+//自定义数据类型
 class MyDataType
 {
 public:
