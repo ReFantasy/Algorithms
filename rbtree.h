@@ -6,35 +6,36 @@ using std::cout;
 using std::cin;
 using std::endl;
 
+//å®å®šä¹‰
 #define rb_parent(r)   ((r)->parent)
 #define rb_color(r) ((r)->color)
 #define rb_is_red(r)   ((r)->color==RED)
 #define rb_is_black(r)  ((r)->color==BLACK)
-#define rb_set_black(r)  do { (r)->color = BLACK; } while (0)
-#define rb_set_red(r)  do { (r)->color = RED; } while (0)
-#define rb_set_parent(r,p)  do { (r)->parent = (p); } while (0)
-#define rb_set_color(r,c)  do { (r)->color = (c); } while (0)
+#define rb_set_black(r)  { (r)->color = BLACK; } 
+#define rb_set_red(r)   { (r)->color = RED; }
+#define rb_set_parent(r,p)   { (r)->parent = (p); } 
+#define rb_set_color(r,c)   { (r)->color = (c); } 
 
 enum RBTColor { RED, BLACK };
 
-//ºìºÚÊ÷µÄ½áµãÀà
+//çº¢é»‘æ ‘çš„ç»“ç‚¹ç±»
 template<typename T>
 class RBTNode
 {
 public:
-	//¹¹Ôìº¯Êı
+	//æ„é€ å‡½æ•°
 	RBTNode(T value, RBTColor c = RED, RBTNode *p = nullptr, RBTNode *l = nullptr, RBTNode *r = nullptr) :
 		key(value), color(c), parent(), left(l), right(r) {}
 
 public:
-	RBTColor color;          //ÑÕÉ«
-	T key;                   //¹Ø¼ü×Ö£¨¼üÖµ£©
+	RBTColor color;          //é¢œè‰²
+	T key;                   //å…³é”®å­—ï¼ˆé”®å€¼ï¼‰
 	RBTNode *left;
 	RBTNode *right;
 	RBTNode *parent;
 };
 
-//ºìºÚÊ÷
+//çº¢é»‘æ ‘
 template<typename T>
 class RBTree
 {
@@ -42,74 +43,74 @@ public:
 	RBTree();
 	~RBTree();
 
-	//Ç°Ğò±éÀú
+	//å‰åºéå†
 	void preOrder();
-	//ÖĞĞò±éÀú
+	//ä¸­åºéå†
 	void inOrder();
-	//ºóĞò±éÀú
+	//ååºéå†
 	void postOrder();
 
-	//(µİ¹é)²éÕÒ¼üÖµkeyµÄ½Úµã
+	//(é€’å½’)æŸ¥æ‰¾é”®å€¼keyçš„èŠ‚ç‚¹
 	RBTNode<T>* search(T key);
-	//(·Çµİ¹é)²éÕÒ¼üÖµkeyµÄ½Úµã
+	//(éé€’å½’)æŸ¥æ‰¾é”®å€¼keyçš„èŠ‚ç‚¹
 	RBTNode<T>* iterativeSearch(T key);
 
-	//²éÕÒ×îĞ¡½Úµã£º·µ»Ø×îĞ¡½ÚµãµÄ¼üÖµ
+	//æŸ¥æ‰¾æœ€å°èŠ‚ç‚¹ï¼šè¿”å›æœ€å°èŠ‚ç‚¹çš„é”®å€¼
 	RBTNode<T>* minimum();
-	//²éÕÒ×î´ó½Úµã£º·µ»Ø×î´ó½ÚµãµÄ¼üÖµ
+	//æŸ¥æ‰¾æœ€å¤§èŠ‚ç‚¹ï¼šè¿”å›æœ€å¤§èŠ‚ç‚¹çš„é”®å€¼
 	RBTNode<T>* maximum();
-	// ½«½áµã(keyÎª½Úµã¼üÖµ)²åÈëµ½ºìºÚÊ÷ÖĞ
+	// å°†ç»“ç‚¹(keyä¸ºèŠ‚ç‚¹é”®å€¼)æ’å…¥åˆ°çº¢é»‘æ ‘ä¸­
 	void insert(T key);
 
-	// É¾³ı½áµã(keyÎª½Úµã¼üÖµ)
+	// åˆ é™¤ç»“ç‚¹(keyä¸ºèŠ‚ç‚¹é”®å€¼)
 	void remove(T key);
 
-	// Ïú»ÙºìºÚÊ÷
+	// é”€æ¯çº¢é»‘æ ‘
 	void destroy();
 
-	// ´òÓ¡ºìºÚÊ÷
+	// æ‰“å°çº¢é»‘æ ‘
 	void print();
 private:
-	// ÕÒ½áµã(x)µÄºó¼Ì½áµã¡£¼´£¬²éÕÒ"ºìºÚÊ÷ÖĞÊı¾İÖµ´óÓÚ¸Ã½áµã"µÄ"×îĞ¡½áµã"¡£
+	// æ‰¾ç»“ç‚¹(x)çš„åç»§ç»“ç‚¹ã€‚å³ï¼ŒæŸ¥æ‰¾"çº¢é»‘æ ‘ä¸­æ•°æ®å€¼å¤§äºè¯¥ç»“ç‚¹"çš„"æœ€å°ç»“ç‚¹"ã€‚
 	RBTNode<T>* successor(RBTNode<T> *x);
-	// ÕÒ½áµã(x)µÄÇ°Çı½áµã¡£¼´£¬²éÕÒ"ºìºÚÊ÷ÖĞÊı¾İÖµĞ¡ÓÚ¸Ã½áµã"µÄ"×î´ó½áµã"¡£
+	// æ‰¾ç»“ç‚¹(x)çš„å‰é©±ç»“ç‚¹ã€‚å³ï¼ŒæŸ¥æ‰¾"çº¢é»‘æ ‘ä¸­æ•°æ®å€¼å°äºè¯¥ç»“ç‚¹"çš„"æœ€å¤§ç»“ç‚¹"ã€‚
 	RBTNode<T>* predecessor(RBTNode<T> *x);
-	// Ç°Ğò±éÀú"ºìºÚÊ÷"
+	// å‰åºéå†"çº¢é»‘æ ‘"
 	void preOrder(RBTNode<T>* tree) const;
-	// ÖĞĞò±éÀú"ºìºÚÊ÷"
+	// ä¸­åºéå†"çº¢é»‘æ ‘"
 	void inOrder(RBTNode<T>* tree) const;
-	// ºóĞò±éÀú"ºìºÚÊ÷"
+	// ååºéå†"çº¢é»‘æ ‘"
 	void postOrder(RBTNode<T>* tree) const;
 
-	// (µİ¹éÊµÏÖ)²éÕÒ"ºìºÚÊ÷x"ÖĞ¼üÖµÎªkeyµÄ½Úµã
+	// (é€’å½’å®ç°)æŸ¥æ‰¾"çº¢é»‘æ ‘x"ä¸­é”®å€¼ä¸ºkeyçš„èŠ‚ç‚¹
 	RBTNode<T>* search(RBTNode<T>* x, T key) const;
-	// (·Çµİ¹éÊµÏÖ)²éÕÒ"ºìºÚÊ÷x"ÖĞ¼üÖµÎªkeyµÄ½Úµã
+	// (éé€’å½’å®ç°)æŸ¥æ‰¾"çº¢é»‘æ ‘x"ä¸­é”®å€¼ä¸ºkeyçš„èŠ‚ç‚¹
 	RBTNode<T>* iterativeSearch(RBTNode<T>* x, T key) const;
 
-	// ²éÕÒ×îĞ¡½áµã£º·µ»ØtreeÎª¸ù½áµãµÄºìºÚÊ÷µÄ×îĞ¡½áµã¡£
+	// æŸ¥æ‰¾æœ€å°ç»“ç‚¹ï¼šè¿”å›treeä¸ºæ ¹ç»“ç‚¹çš„çº¢é»‘æ ‘çš„æœ€å°ç»“ç‚¹ã€‚
 	RBTNode<T>* minimum(RBTNode<T>* tree);
-	// ²éÕÒ×î´ó½áµã£º·µ»ØtreeÎª¸ù½áµãµÄºìºÚÊ÷µÄ×î´ó½áµã¡£
+	// æŸ¥æ‰¾æœ€å¤§ç»“ç‚¹ï¼šè¿”å›treeä¸ºæ ¹ç»“ç‚¹çš„çº¢é»‘æ ‘çš„æœ€å¤§ç»“ç‚¹ã€‚
 	RBTNode<T>* maximum(RBTNode<T>* tree);
 
-	// ×óĞı
+	// å·¦æ—‹
 	void leftRotate(RBTNode<T>* &root, RBTNode<T>* x);
-	// ÓÒĞı
+	// å³æ—‹
 	void rightRotate(RBTNode<T>* &root, RBTNode<T>* y);
-	// ²åÈëº¯Êı
+	// æ’å…¥å‡½æ•°
 	void insert(RBTNode<T>* &root, RBTNode<T>* node);
-	// ²åÈëĞŞÕıº¯Êı
+	// æ’å…¥ä¿®æ­£å‡½æ•°
 	void insertFixUp(RBTNode<T>* &root, RBTNode<T>* node);
-	// É¾³ıº¯Êı
+	// åˆ é™¤å‡½æ•°
 	void remove(RBTNode<T>* &root, RBTNode<T> *node);
-	// É¾³ıĞŞÕıº¯Êı
+	// åˆ é™¤ä¿®æ­£å‡½æ•°
 	void removeFixUp(RBTNode<T>* &root, RBTNode<T> *node, RBTNode<T> *parent);
-	// Ïú»ÙºìºÚÊ÷
+	// é”€æ¯çº¢é»‘æ ‘
 	void destroy(RBTNode<T>* &tree);
-	// ´òÓ¡ºìºÚÊ÷
+	// æ‰“å°çº¢é»‘æ ‘
 	void print(RBTNode<T>* tree, T key, int direction);
 
 private:
-	RBTNode<T> *mRoot;    //¸ù½Úµã
+	RBTNode<T> *mRoot;    //æ ¹èŠ‚ç‚¹
 };
 
 template<typename T>
@@ -264,13 +265,13 @@ RBTNode<T>* RBTree<T>::maximum(RBTNode<T>* tree)
 template<typename T>
 RBTNode<T>* RBTree<T>::successor(RBTNode<T> *x)
 {
-	//Èç¹ûx´æÔÚÓÒº¢×Ó£¬Ôòºó¼ÌÎªÒÔxµÄÓÒº¢×ÓÎª¸ùµÄÊ÷µÄ×îĞ¡Öµ
+	//å¦‚æœxå­˜åœ¨å³å­©å­ï¼Œåˆ™åç»§ä¸ºä»¥xçš„å³å­©å­ä¸ºæ ¹çš„æ ‘çš„æœ€å°å€¼
 	if (x != nullptr && x->right != nullptr)
 		return minimum(x->right);
 
-	//Èç¹ûx²»´æÔÚÓÒº¢×Ó
-	//1.xÊÇÒ»¸ö×óº¢×Ó£¬ xµÄºó¼ÌÎªxµÄ¸¸½Úµã
-	//2.xÊÇÒ»¸öÓÒº¢×Ó£¬
+	//å¦‚æœxä¸å­˜åœ¨å³å­©å­
+	//1.xæ˜¯ä¸€ä¸ªå·¦å­©å­ï¼Œ xçš„åç»§ä¸ºxçš„çˆ¶èŠ‚ç‚¹
+	//2.xæ˜¯ä¸€ä¸ªå³å­©å­ï¼Œ
 	RBTNode<T>* y = x->parent;
 	while ((y != nullptr) && (x == y->right))
 	{
@@ -308,12 +309,12 @@ void RBTree<T>::insert(T key)
 }
 
 /*
-* ¶ÔºìºÚÊ÷µÄ½Úµã(x)½øĞĞ×óĞı×ª
-* ×óĞıÊ¾ÒâÍ¼(¶Ô½Úµãx½øĞĞ×óĞı)£º
+* å¯¹çº¢é»‘æ ‘çš„èŠ‚ç‚¹(x)è¿›è¡Œå·¦æ—‹è½¬
+* å·¦æ—‹ç¤ºæ„å›¾(å¯¹èŠ‚ç‚¹xè¿›è¡Œå·¦æ—‹)ï¼š
 *      px                              px
 *     /                               /
 *    x                               y
-*   /  \      --(×óĞı)-->           / \                #
+*   /  \      --(å·¦æ—‹)-->           / \                #
 *  lx   y                          x  ry
 *     /   \                       /  \
 *    ly   ry                     lx  ly
@@ -349,13 +350,13 @@ void RBTree<T>::leftRotate(RBTNode<T>* &root, RBTNode<T>* x)
 }
 
 /*
-* ¶ÔºìºÚÊ÷µÄ½Úµã(y)½øĞĞÓÒĞı×ª
+* å¯¹çº¢é»‘æ ‘çš„èŠ‚ç‚¹(y)è¿›è¡Œå³æ—‹è½¬
 *
-* ÓÒĞıÊ¾ÒâÍ¼(¶Ô½Úµãy½øĞĞ×óĞı)£º
+* å³æ—‹ç¤ºæ„å›¾(å¯¹èŠ‚ç‚¹yè¿›è¡Œå·¦æ—‹)ï¼š
 *            py                               py
 *           /                                /
 *          y                                x
-*         /  \      --(ÓÒĞı)-->            /  \                     #
+*         /  \      --(å³æ—‹)-->            /  \                     #
 *        x   ry                           lx   y
 *       / \                                   / \                   #
 *      lx  rx                                rx  ry
@@ -443,12 +444,12 @@ void RBTree<T>::insertFixUp(RBTNode<T>* &root, RBTNode<T>* node)
 	while ((parent = rb_parent(node)) && (rb_is_red(parent)))
 	{
 		gparent = rb_parent(parent);
-		//¸¸½ÚµãÊÇ×æ¸¸½Úµã×óº¢×Ó
+		//çˆ¶èŠ‚ç‚¹æ˜¯ç¥–çˆ¶èŠ‚ç‚¹å·¦å­©å­
 		if (parent == gparent->left)
 		{
 			auto uncle = gparent->right;
 
-			//ÊåÊåÊÇºìÉ«½Úµã
+			//å”å”æ˜¯çº¢è‰²èŠ‚ç‚¹
 			if (uncle && rb_is_red(uncle))
 			{
 				rb_set_black(parent);
@@ -458,7 +459,7 @@ void RBTree<T>::insertFixUp(RBTNode<T>* &root, RBTNode<T>* node)
 				continue;
 			}
 
-			//ÊåÊå½ÚµãÊÇºÚÉ«µÄ£¬µ±Ç°½ÚµãÊÇÓÒº¢×Ó
+			//å”å”èŠ‚ç‚¹æ˜¯é»‘è‰²çš„ï¼Œå½“å‰èŠ‚ç‚¹æ˜¯å³å­©å­
 			if (parent->right == node)
 			{
 				RBTNode<T>* tmp;
@@ -468,17 +469,17 @@ void RBTree<T>::insertFixUp(RBTNode<T>* &root, RBTNode<T>* node)
 				node = tmp;
 			}
 
-			//ÊåÊå½ÚµãÊÇºÚÉ«µÄ£¬µ±Ç°½ÚµãÊÇ×óº¢×Ó
+			//å”å”èŠ‚ç‚¹æ˜¯é»‘è‰²çš„ï¼Œå½“å‰èŠ‚ç‚¹æ˜¯å·¦å­©å­
 			rb_set_black(parent);
 			rb_set_red(gparent);
 			rightRotate(root, gparent);
 		}
-		//¸¸½ÚµãÊÇ×æ¸¸½ÚµãÓÒº¢×Ó
+		//çˆ¶èŠ‚ç‚¹æ˜¯ç¥–çˆ¶èŠ‚ç‚¹å³å­©å­
 		else if(parent == gparent->right)
 		{
 			auto uncle = gparent->left;
 
-			//ÊåÊåÊÇºìÉ«½Úµã
+			//å”å”æ˜¯çº¢è‰²èŠ‚ç‚¹
 			if (uncle && rb_is_red(uncle))
 			{
 				rb_set_black(parent);
@@ -488,7 +489,7 @@ void RBTree<T>::insertFixUp(RBTNode<T>* &root, RBTNode<T>* node)
 				continue;
 			}
 
-			//ÊåÊå½ÚµãÊÇºÚÉ«µÄ£¬µ±Ç°½ÚµãÊÇ×óº¢×Ó
+			//å”å”èŠ‚ç‚¹æ˜¯é»‘è‰²çš„ï¼Œå½“å‰èŠ‚ç‚¹æ˜¯å·¦å­©å­
 			if (parent->left == node)
 			{
 				RBTNode<T>* tmp;
@@ -498,7 +499,7 @@ void RBTree<T>::insertFixUp(RBTNode<T>* &root, RBTNode<T>* node)
 				node = tmp;
 			}
 
-			//ÊåÊå½ÚµãÊÇºÚÉ«µÄ£¬µ±Ç°½ÚµãÊÇÓÒº¢×Ó
+			//å”å”èŠ‚ç‚¹æ˜¯é»‘è‰²çš„ï¼Œå½“å‰èŠ‚ç‚¹æ˜¯å³å­©å­
 			rb_set_black(parent);
 			rb_set_red(gparent);
 			leftRotate(root, gparent);
@@ -513,9 +514,9 @@ void RBTree<T>::print(RBTNode<T>* tree, T key, int direction)
 {
 	if (tree != NULL)
 	{
-		if (direction == 0)    // treeÊÇ¸ù½Úµã
+		if (direction == 0)    // treeæ˜¯æ ¹èŠ‚ç‚¹
 			cout << setw(2) << tree->key << "(B) is root" << endl;
-		else                // treeÊÇ·ÖÖ§½Úµã
+		else                // treeæ˜¯åˆ†æ”¯èŠ‚ç‚¹
 			cout << setw(2) << tree->key << (rb_is_red(tree) ? "(R)" : "(B)") << " is " << setw(2) << key << "'s " << setw(12) << (direction == 1 ? "right child" : "left child") << endl;
 
 		print(tree->left, tree->key, -1);
@@ -537,7 +538,7 @@ void RBTree<T>::remove(RBTNode<T>* &root, RBTNode<T> *node)
 	//RBTNode<T> *y, *x;
 	//if (node->left == nullptr || node->right == nullptr)
 	//{
-	//	y = node; //yÎªÌæ»»½Úµã
+	//	y = node; //yä¸ºæ›¿æ¢èŠ‚ç‚¹
 	//}
 	//else
 	//{
@@ -580,19 +581,19 @@ void RBTree<T>::remove(RBTNode<T>* &root, RBTNode<T> *node)
 	RBTNode<T> *child, *parent;
 	RBTColor color;
 
-	// ±»É¾³ı½ÚµãµÄ"×óÓÒº¢×Ó¶¼²»Îª¿Õ"µÄÇé¿ö¡£
+	// è¢«åˆ é™¤èŠ‚ç‚¹çš„"å·¦å³å­©å­éƒ½ä¸ä¸ºç©º"çš„æƒ…å†µã€‚
 	if ((node->left != NULL) && (node->right != NULL))
 	{
-		// ±»É¾½ÚµãµÄºó¼Ì½Úµã¡£(³ÆÎª"È¡´ú½Úµã")
-		// ÓÃËüÀ´È¡´ú"±»É¾½Úµã"µÄÎ»ÖÃ£¬È»ºóÔÙ½«"±»É¾½Úµã"È¥µô¡£
+		// è¢«åˆ èŠ‚ç‚¹çš„åç»§èŠ‚ç‚¹ã€‚(ç§°ä¸º"å–ä»£èŠ‚ç‚¹")
+		// ç”¨å®ƒæ¥å–ä»£"è¢«åˆ èŠ‚ç‚¹"çš„ä½ç½®ï¼Œç„¶åå†å°†"è¢«åˆ èŠ‚ç‚¹"å»æ‰ã€‚
 		RBTNode<T> *replace = node;
 
-		// »ñÈ¡ºó¼Ì½Úµã
+		// è·å–åç»§èŠ‚ç‚¹
 		replace = replace->right;
 		while (replace->left != NULL)
 			replace = replace->left;
 
-		// "node½Úµã"²»ÊÇ¸ù½Úµã(Ö»ÓĞ¸ù½Úµã²»´æÔÚ¸¸½Úµã)
+		// "nodeèŠ‚ç‚¹"ä¸æ˜¯æ ¹èŠ‚ç‚¹(åªæœ‰æ ¹èŠ‚ç‚¹ä¸å­˜åœ¨çˆ¶èŠ‚ç‚¹)
 		if (rb_parent(node))
 		{
 			if (rb_parent(node)->left == node)
@@ -601,24 +602,24 @@ void RBTree<T>::remove(RBTNode<T>* &root, RBTNode<T> *node)
 				rb_parent(node)->right = replace;
 		}
 		else
-			// "node½Úµã"ÊÇ¸ù½Úµã£¬¸üĞÂ¸ù½Úµã¡£
+			// "nodeèŠ‚ç‚¹"æ˜¯æ ¹èŠ‚ç‚¹ï¼Œæ›´æ–°æ ¹èŠ‚ç‚¹ã€‚
 			root = replace;
 
-		// childÊÇ"È¡´ú½Úµã"µÄÓÒº¢×Ó£¬Ò²ÊÇĞèÒª"µ÷ÕûµÄ½Úµã"¡£
-		// "È¡´ú½Úµã"¿Ï¶¨²»´æÔÚ×óº¢×Ó£¡ÒòÎªËüÊÇÒ»¸öºó¼Ì½Úµã¡£
+		// childæ˜¯"å–ä»£èŠ‚ç‚¹"çš„å³å­©å­ï¼Œä¹Ÿæ˜¯éœ€è¦"è°ƒæ•´çš„èŠ‚ç‚¹"ã€‚
+		// "å–ä»£èŠ‚ç‚¹"è‚¯å®šä¸å­˜åœ¨å·¦å­©å­ï¼å› ä¸ºå®ƒæ˜¯ä¸€ä¸ªåç»§èŠ‚ç‚¹ã€‚
 		child = replace->right;
 		parent = rb_parent(replace);
-		// ±£´æ"È¡´ú½Úµã"µÄÑÕÉ«
+		// ä¿å­˜"å–ä»£èŠ‚ç‚¹"çš„é¢œè‰²
 		color = rb_color(replace);
 
-		// "±»É¾³ı½Úµã"ÊÇ"ËüµÄºó¼Ì½ÚµãµÄ¸¸½Úµã"
+		// "è¢«åˆ é™¤èŠ‚ç‚¹"æ˜¯"å®ƒçš„åç»§èŠ‚ç‚¹çš„çˆ¶èŠ‚ç‚¹"
 		if (parent == node)
 		{
 			parent = replace;
 		}
 		else
 		{
-			// child²»Îª¿Õ
+			// childä¸ä¸ºç©º
 			if (child)
 				rb_set_parent(child, parent);
 			parent->left = child;
@@ -645,13 +646,13 @@ void RBTree<T>::remove(RBTNode<T>* &root, RBTNode<T> *node)
 		child = node->right;
 
 	parent = node->parent;
-	// ±£´æ"È¡´ú½Úµã"µÄÑÕÉ«
+	// ä¿å­˜"å–ä»£èŠ‚ç‚¹"çš„é¢œè‰²
 	color = node->color;
 
 	if (child)
 		child->parent = parent;
 
-	// "node½Úµã"²»ÊÇ¸ù½Úµã
+	// "nodeèŠ‚ç‚¹"ä¸æ˜¯æ ¹èŠ‚ç‚¹
 	if (parent)
 	{
 		if (parent->left == node)
@@ -681,7 +682,7 @@ void RBTree<T>::removeFixUp(RBTNode<T>* &root, RBTNode<T> *node, RBTNode<T> *par
 			other = parent->right;
 			if (rb_is_red(other))
 			{
-				// Case 1: xµÄĞÖµÜwÊÇºìÉ«µÄ  
+				// Case 1: xçš„å…„å¼Ÿwæ˜¯çº¢è‰²çš„  
 				rb_set_black(other);
 				rb_set_red(parent);
 				leftRotate(root, parent);
@@ -690,7 +691,7 @@ void RBTree<T>::removeFixUp(RBTNode<T>* &root, RBTNode<T> *node, RBTNode<T> *par
 			if ((!other->left || rb_is_black(other->left)) &&
 				(!other->right || rb_is_black(other->right)))
 			{
-				// Case 2: xµÄĞÖµÜwÊÇºÚÉ«£¬ÇÒwµÄÁ©¸öº¢×ÓÒ²¶¼ÊÇºÚÉ«µÄ  
+				// Case 2: xçš„å…„å¼Ÿwæ˜¯é»‘è‰²ï¼Œä¸”wçš„ä¿©ä¸ªå­©å­ä¹Ÿéƒ½æ˜¯é»‘è‰²çš„  
 				rb_set_red(other);
 				node = parent;
 				parent = rb_parent(node);
@@ -699,13 +700,13 @@ void RBTree<T>::removeFixUp(RBTNode<T>* &root, RBTNode<T> *node, RBTNode<T> *par
 			{
 				if (!other->right || rb_is_black(other->right))
 				{
-					// Case 3: xµÄĞÖµÜwÊÇºÚÉ«µÄ£¬²¢ÇÒwµÄ×óº¢×ÓÊÇºìÉ«£¬ÓÒº¢×ÓÎªºÚÉ«¡£  
+					// Case 3: xçš„å…„å¼Ÿwæ˜¯é»‘è‰²çš„ï¼Œå¹¶ä¸”wçš„å·¦å­©å­æ˜¯çº¢è‰²ï¼Œå³å­©å­ä¸ºé»‘è‰²ã€‚  
 					rb_set_black(other->left);
 					rb_set_red(other);
 					rightRotate(root, other);
 					other = parent->right;
 				}
-				// Case 4: xµÄĞÖµÜwÊÇºÚÉ«µÄ£»²¢ÇÒwµÄÓÒº¢×ÓÊÇºìÉ«µÄ£¬×óº¢×ÓÈÎÒâÑÕÉ«¡£
+				// Case 4: xçš„å…„å¼Ÿwæ˜¯é»‘è‰²çš„ï¼›å¹¶ä¸”wçš„å³å­©å­æ˜¯çº¢è‰²çš„ï¼Œå·¦å­©å­ä»»æ„é¢œè‰²ã€‚
 				rb_set_color(other, rb_color(parent));
 				rb_set_black(parent);
 				rb_set_black(other->right);
@@ -719,7 +720,7 @@ void RBTree<T>::removeFixUp(RBTNode<T>* &root, RBTNode<T> *node, RBTNode<T> *par
 			other = parent->left;
 			if (rb_is_red(other))
 			{
-				// Case 1: xµÄĞÖµÜwÊÇºìÉ«µÄ  
+				// Case 1: xçš„å…„å¼Ÿwæ˜¯çº¢è‰²çš„  
 				rb_set_black(other);
 				rb_set_red(parent);
 				rightRotate(root, parent);
@@ -728,7 +729,7 @@ void RBTree<T>::removeFixUp(RBTNode<T>* &root, RBTNode<T> *node, RBTNode<T> *par
 			if ((!other->left || rb_is_black(other->left)) &&
 				(!other->right || rb_is_black(other->right)))
 			{
-				// Case 2: xµÄĞÖµÜwÊÇºÚÉ«£¬ÇÒwµÄÁ©¸öº¢×ÓÒ²¶¼ÊÇºÚÉ«µÄ  
+				// Case 2: xçš„å…„å¼Ÿwæ˜¯é»‘è‰²ï¼Œä¸”wçš„ä¿©ä¸ªå­©å­ä¹Ÿéƒ½æ˜¯é»‘è‰²çš„  
 				rb_set_red(other);
 				node = parent;
 				parent = rb_parent(node);
@@ -737,13 +738,13 @@ void RBTree<T>::removeFixUp(RBTNode<T>* &root, RBTNode<T> *node, RBTNode<T> *par
 			{
 				if (!other->left || rb_is_black(other->left))
 				{
-					// Case 3: xµÄĞÖµÜwÊÇºÚÉ«µÄ£¬²¢ÇÒwµÄ×óº¢×ÓÊÇºìÉ«£¬ÓÒº¢×ÓÎªºÚÉ«¡£  
+					// Case 3: xçš„å…„å¼Ÿwæ˜¯é»‘è‰²çš„ï¼Œå¹¶ä¸”wçš„å·¦å­©å­æ˜¯çº¢è‰²ï¼Œå³å­©å­ä¸ºé»‘è‰²ã€‚  
 					rb_set_black(other->right);
 					rb_set_red(other);
 					leftRotate(root, other);
 					other = parent->left;
 				}
-				// Case 4: xµÄĞÖµÜwÊÇºÚÉ«µÄ£»²¢ÇÒwµÄÓÒº¢×ÓÊÇºìÉ«µÄ£¬×óº¢×ÓÈÎÒâÑÕÉ«¡£
+				// Case 4: xçš„å…„å¼Ÿwæ˜¯é»‘è‰²çš„ï¼›å¹¶ä¸”wçš„å³å­©å­æ˜¯çº¢è‰²çš„ï¼Œå·¦å­©å­ä»»æ„é¢œè‰²ã€‚
 				rb_set_color(other, rb_color(parent));
 				rb_set_black(parent);
 				rb_set_black(other->left);
@@ -761,7 +762,7 @@ void RBTree<T>::remove(T key)
 {
 	RBTNode<T> *node;
 
-	// ²éÕÒkey¶ÔÓ¦µÄ½Úµã(node)£¬ÕÒµ½µÄ»°¾ÍÉ¾³ı¸Ã½Úµã
+	// æŸ¥æ‰¾keyå¯¹åº”çš„èŠ‚ç‚¹(node)ï¼Œæ‰¾åˆ°çš„è¯å°±åˆ é™¤è¯¥èŠ‚ç‚¹
 	if ((node = search(mRoot, key)) != nullptr)
 		remove(mRoot, node);
 }
