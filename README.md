@@ -50,3 +50,67 @@ int main()
 }
 
 ```
+
+## 十三章 红黑树
+**源文件：**
+
+[rbtree.h](./rbtree.h)
+
+**类成员函数:**
+```C++
+        RBTree();
+	~RBTree();
+
+	//前序遍历
+	void preOrder();
+	//中序遍历
+	void inOrder();
+	//后序遍历
+	void postOrder();
+
+	//(递归)查找键值key的节点
+	RBTNode<T>* search(T key);
+	//(非递归)查找键值key的节点
+	RBTNode<T>* iterativeSearch(T key);
+
+	//查找最小节点：返回最小节点的键值
+	RBTNode<T>* minimum();
+	//查找最大节点：返回最大节点的键值
+	RBTNode<T>* maximum();
+	// 将结点(key为节点键值)插入到红黑树中
+	void insert(T key);
+
+	// 删除结点(key为节点键值)
+	void remove(T key);
+
+	// 销毁红黑树
+	void destroy();
+
+	// 打印红黑树
+	void print();
+```
+
+
+**使用示例：**
+```C++
+#include <iostream>
+#include "rbtree.h"
+using namespace std;
+
+int main()
+{
+	RBTree<int> tr;
+	tr.insert(4);	
+	tr.insert(3);
+	tr.insert(2);
+	tr.insert(5);
+	tr.insert(10);
+	tr.insert(8);
+	tr.insert(12);
+
+	//tr.destroy();
+	tr.print();
+	return 0;
+} 
+```
+
