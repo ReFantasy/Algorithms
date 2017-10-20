@@ -96,17 +96,58 @@ int main()
 #include <iostream>
 #include "rbtree.h"
 using namespace std;
+class MyDataType
+{
+public:
+	MyDataType():value(0) {}
+	MyDataType(int mvalue)
+	{
+		value = mvalue;
+	}
 
+	int value = 0;
+
+//运算符重载
+public:
+	bool operator<(MyDataType rvalue)
+	{
+		if (value < rvalue.value)
+			return true;
+		else
+			return false;
+	}
+	bool operator>(MyDataType rvalue)
+	{
+		if (value > rvalue.value)
+			return true;
+		else
+			return false;
+	}
+	bool operator==(MyDataType rvalue)
+	{
+		if (*this<rvalue || *this>rvalue)
+			return false;
+		else
+			return true;
+	}
+	
+};
+std::ostream& operator<<(std::ostream& out, const MyDataType& m)
+{
+	out << m.value;
+	return out;
+}
 int main()
 {
-	RBTree<int> tr;
-	tr.insert(4);	
-	tr.insert(3);
-	tr.insert(2);
-	tr.insert(5);
-	tr.insert(10);
-	tr.insert(8);
-	tr.insert(12);
+        //模板类，可以使用自定义数据类型
+	RBTree<MyDataType> tr;
+	tr.insert(MyDataType(4));
+	tr.insert(MyDataType(3));
+	tr.insert(MyDataType(2));
+	tr.insert(MyDataType(5));
+	tr.insert(MyDataType(10));
+	tr.insert(MyDataType(8));
+	tr.insert(MyDataType(12));
 
 	//tr.destroy();
 	tr.print();
